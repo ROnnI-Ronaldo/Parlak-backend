@@ -24,8 +24,8 @@ exports.adminSignIn = async (req, res) => {
     role: user.role,
   };
 
-  const token = jwt.sign(payload, process.env.JWT_SECRET);
-  res.cookie("token", token);
+  const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+  res.cookie("token", token, { expiresIn: "1h" });
   return res.status(200).json({
     token,
     user: {
